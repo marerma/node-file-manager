@@ -7,7 +7,6 @@ export const addFile = async (input) => {
   const currentDir = process.cwd();
   const fileName = input.split(' ').slice(1).join('');
   const filePath = join(currentDir, fileName);
-  console.log(currentDir, fileName, filePath);
   LoggerService.logCurrentDir();
   try {
     await writeFile(filePath, '');

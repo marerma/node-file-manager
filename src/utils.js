@@ -19,6 +19,7 @@ export const getCurrentDir = () => {
 }
 
 export const cleanPath = (path) => {
+  if (!path) throw new Error();
   let normalPath = path;
   if (path.includes('"') || path.includes("'")) {
     normalPath = path.replace(/["']/g, '');

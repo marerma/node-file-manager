@@ -2,9 +2,10 @@ import { stdin as input, stdout as output } from 'node:process';
 import * as readline from 'node:readline/promises';
 import { LoggerService } from "./Logger.service.js";
 import { ERROR_MSG } from "./constants.js";
-import { addFile, changeDir, goToHomeDir, listContent, readFile, up, deleteFile, renameFile, copyFile, moveFile  } from "./fs/index.js";
+import { addFile, changeDir, goToHomeDir, listContent, readFile, calculateHash, up, deleteFile, renameFile, copyFile, moveFile  } from "./fs/index.js";
 import { osHandler } from "./osHandler.js";
 import { parseArguments } from "./utils.js";
+import {compress} from './compress.js'
 
 
 
@@ -16,16 +17,19 @@ const rl = readline.createInterface({input, output});
 
 
 const COMMANDS = {
-  os: (input) => osHandler(input),
-  ls: async() => await listContent(), 
-  up: ()=> up(),
+  up: () => up(),
   cd: (input) => changeDir(input),
+  ls: async() => await listContent(), 
   cat: async (input) => await readFile(input),
   add: async (input) => await addFile(input),
-  rm: async (input) => await deleteFile(input),
   rn: async (input) => await renameFile(input),
   cp: async (input) => await copyFile(input),
   mv: async (input) => await moveFile(input),
+  rm: async (input) => await deleteFile(input),
+  os: (input) => osHandler(input),
+  hash: async (input) => await calculateHash(input),
+  compress: async (input) => await compress(input, 'compress'),
+  decompress: async (input) => await compress(input, 'decompress'),
 
   '.exit': () => {
     LoggerService.logMsg(`Thank you for using File Manager, ${userName}, goodbye!`);

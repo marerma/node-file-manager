@@ -10,13 +10,22 @@ export const copyFile = async(input) => {
 
   const args = input.split(' ').slice(1);
   const fileSourcePath = cleanPath(args[0]);
-  const fileName = path.basename(fileSourcePath);
+  const fileName = path.basename(fileSourcePath)?? '';
   const fileTargetPath = path.resolve(cleanPath(args[1]), fileName);
 
   try {
     const readStream = fs.createReadStream(fileSourcePath);
+
+    readStream.on('error', (error) => {
+      LoggerService.logMsg(ERROR_MSG.fail);
+    });
+
     const writeStream = fs.createWriteStream(fileTargetPath);
-    await pipeline(readStream, writeStream)
+
+    writeStream.on('error', (error) => {
+      LoggerService.logMsg(ERROR_MSG.fail);
+    });
+    await pipeline(readStream, writeStream);
   } catch {
     LoggerService.logMsg(ERROR_MSG.fail)
   }

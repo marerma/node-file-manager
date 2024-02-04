@@ -7,6 +7,8 @@ export {up} from './up.js';
 export {renameFile} from './rename.js';
 export {copyFile} from './copyFile.js';
 export {moveFile} from './moveFile.js';
+export {calculateHash} from './hash.js';
+
 
 
 
