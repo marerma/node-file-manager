@@ -18,7 +18,7 @@ export const getOsUserSystemInfo = () => {
 
   return ({
     username: os.userInfo().username,
-    EOL: os.EOL,
+    EOL: JSON.stringify(os.EOL),
     homedir: os.homedir(),
     cpus: getCPUData(),
     architecture: os.arch()
