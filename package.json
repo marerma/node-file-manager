@@ -1,0 +1,12 @@
+{
+  "name": "file-manager",
+  "version": "1.0.0",
+  "description": "task 2 RS-Course NodeJS",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js --username=newUser"
+  },
+  "author": "marerma",
+  "license": "ISC"
+}
